@@ -10,4 +10,4 @@ jobs:
     - name: install airbnb config
       run: npm i eslint-config-airbnb
     - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint --no-eslintrc --config .eslintrc.yml .
