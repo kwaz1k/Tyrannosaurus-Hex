@@ -1,1 +1,1 @@
-console.log("linter test");
+console.log('linter test');
