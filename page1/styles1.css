@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'minecraft';
-    src: url('./Tools/Fonts/F77-Minecraft.ttf');
+    src: url('../resources/fonts/F77-Minecraft.ttf');
   }
   
   body {
     margin: 0;
     overflow: hidden;
-    background-image: url("./Tools/Image/background2.jpg");
+    background-image: url("./images/background2.jpg");
     background-size: cover;
     background-position: center;
     font-family: 'minecraft', sans-serif;
