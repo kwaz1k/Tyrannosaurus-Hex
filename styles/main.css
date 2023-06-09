@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'minecraft';
+    src: url('../resources/fonts/F77-Minecraft.ttf');
+  }
+  
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-image: url("../images/background2.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: 'minecraft', sans-serif;
+  }
+  
+  .fullscreen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  h1 {
+    background-image: linear-gradient(to left, #fff200, #66ff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    font-size: 86px;
+    font-weight: bold;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  a {
+    margin-right: 10px;
+    padding: 12px 24px;
+    font-size: 18px;
+    background-image: linear-gradient(to bottom, #fff, #41f2fa);
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'minecraft', sans-serif;
+  }
+  
+  a:hover {
+    color: #fff;
+    background-image: linear-gradient(to bottom, #41f2fa, #159CA2);
+    border: 2px solid #0C7844;
+  }
+  
+  /* Медиазапросы */
+  
+  @media (max-width: 767px) {
+    body {
+      font-size: 14px; /* Изменение размера шрифта для мобильных устройств */
+    }
+  
+    h1 {
+      font-size: 48px; /* Изменение размера заголовка для мобильных устройств */
+    }
+  
+    button {
+      font-size: 16px; /* Изменение размера кнопки для мобильных устройств */
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .fullscreen-container {
+      height: 100vh; /* Изменение высоты контейнера для планшетов и небольших ноутбуков */
+    }
+  
+    h1 {
+      font-size: 64px; /* Изменение размера заголовка для планшетов и небольших ноутбуков */
+    }
+  
+    button {
+      font-size: 18px; /* Изменение размера кнопки для планшетов и небольших ноутбуков */
+    }
+  }
+  
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .fullscreen-container {
+      height: 100vh; /* Изменение высоты контейнера для средних и больших ноутбуков и настольных компьютеров */
+    }
+  
+    h1 {
+      font-size: 72px; /* Изменение размера заголовка для средних и больших ноутбуков и настольных компьютеров */
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .fullscreen-container {
+      height: 100vh; /* Изменение высоты контейнера для больших настольных компьютеров и широкоформатных мониторов */
+    }
+  
+    h1 {
+      font-size: 86px; /* Изменение размера заголовка для больших настольных компьютеров и широкоформатных мониторов */
+    }
+  }
+  

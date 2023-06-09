@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'minecraft';
+    src: url('../resources/fonts/F77-Minecraft.ttf');
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Changed height to min-height for responsiveness */
+    margin: 0; /* Removed margin to ensure full-width background */
+    background-image: url("../images/background1.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: 'minecraft', sans-serif;
+  }
+  
+  h1 {
+    background-image: linear-gradient(to left, #fff200, #66ff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: -10vh;
+    color: #fff;
+    font-size: 86px;
+    font-weight: bold;
+  }
+  
+  .levels {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button-link {
+    display: flex;
+    border: 10px solid #159CA3;
+    border-radius: 10px;
+    margin: 20px; /* Decreased margin for better spacing */
+  }
+  
+  .back-button {
+    margin-right: 10px;
+    padding: 12px 24px;
+    font-size: 18px;
+    display: block;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #fff, #41f2fa);
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'minecraft', sans-serif;
+  }
+  
+  .back-button:hover {
+    color: #fff;
+    background-image: linear-gradient(to bottom, #41f2fa, #159CA2);
+    border: 2px solid #0C7844;
+  }
+  
+  .button-link:hover {
+    border: 10px solid #41f2fa;
+  }
+  
+  /* Media Queries */
+  
+  @media (max-width: 767px) {
+    body {
+      font-size: 14px;
+    }
+  
+    h1 {
+      font-size: 48px;
+    }
+  
+    .back-button,
+    button {
+      font-size: 16px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    body {
+      font-size: 16px; /* Increased font size for tablets */
+    }
+  
+    h1 {
+      font-size: 64px;
+    }
+  
+    button {
+      font-size: 18px;
+    }
+  }
+  
+  @media (min-width: 992px) and (max-width: 1199px) {
+    body {
+      font-size: 18px; /* Increased font size for medium and large laptops */
+    }
+  
+    h1 {
+      font-size: 72px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    body {
+      font-size: 20px; /* Increased font size for large desktops and wide monitors */
+    }
+  
+    h1 {
+      font-size: 86px;
+    }
+  }
+  
