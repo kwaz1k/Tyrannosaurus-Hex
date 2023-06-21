@@ -20,5 +20,8 @@
   "dependencies": {
     "gh-pages": "^5.0.0",
     "phaser": "^3.60.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
   }
 }
