@@ -1,4 +1,6 @@
 name: linter and deploy
+with:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 on: push
 jobs:
   linter:
