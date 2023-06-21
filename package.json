@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kwaz1k/Tyrannosaurus-Hex.git"
+    "url": "git+https://github.com/grittyzavr/Tyrannosaurus-Hex.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kwaz1k/Tyrannosaurus-Hex/issues"
+    "url": "https://github.com/grittyzavr/Tyrannosaurus-Hex/issues"
   },
-  "homepage": "https://github.com/kwaz1k/Tyrannosaurus-Hex#readme",
+  "homepage": "https://github.com/grittyzavr/Tyrannosaurus-Hex#readme",
   "dependencies": {
     "gh-pages": "^5.0.0",
     "phaser": "^3.60.0"
