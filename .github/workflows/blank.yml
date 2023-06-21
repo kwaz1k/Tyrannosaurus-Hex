@@ -1,7 +1,7 @@
-name: CI
+name: linter and deploy
 on: push
 jobs:
-  build:
+  linter:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -11,28 +11,17 @@ jobs:
       run: npm i eslint-config-airbnb
     - name: Run ESLint
       run: npx eslint --no-eslintrc --config .eslintrc.yml .
-
-name: Deploy
-jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'  # Вы можете заменить на версию Node.js, которую вы используете
-
       - name: Install Dependencies
         run: npm install
-      
       - name: Build
-        run: npm run predeploy  # Убедитесь, что у вас есть скрипт "build" в вашем package.json, который запускает Parcel
-
+        run: npm run predeploy
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          branch: gh-pages  # Или любую другую ветку, на которую вы хотите деплоить
-          folder: dist  # Или любую другую папку, в которую Parcel собирает ваш проект
+          branch: gh-pages
+          folder: dist
