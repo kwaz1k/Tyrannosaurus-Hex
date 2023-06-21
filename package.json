@@ -19,6 +19,7 @@
   "homepage": "https://github.com/grittyzavr/Tyrannosaurus-Hex#readme",
   "dependencies": {
     "gh-pages": "^5.0.0",
+    "parcel": "^2.9.2",
     "phaser": "^3.60.0"
   },
   "devDependencies": {
