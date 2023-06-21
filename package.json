@@ -2,9 +2,11 @@
   "name": "tyrannosaurus-hex",
   "version": "1.0.0",
   "description": "game.",
-  "main": "index.js",
   "scripts": {
-    "test": "npx eslint --no-eslintrc --config .eslintrc.yml ."
+    "test": "npx eslint --no-eslintrc --config .eslintrc.yml .",
+    "start": "parcel ./*.html",
+    "predeploy": "rm -rf dist && parcel build ./index.html",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/kwaz1k/Tyrannosaurus-Hex#readme",
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "phaser": "^3.60.0"
   }
 }
