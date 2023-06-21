@@ -1,4 +1,3 @@
-import background from './resources/images/background2.jpg';
 import { gameScene } from './game/gameScene.js';
 
 const config = {
@@ -11,7 +10,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('background', background);
+  this.load.image('background', 'https://i.postimg.cc/xnf9kMsf/background2.jpg?dl=1');
 }
 
 function create() {
