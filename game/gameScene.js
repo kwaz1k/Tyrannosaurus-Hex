@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const gameScene = new Phaser.Class({
   Extends: Phaser.Scene,
 
