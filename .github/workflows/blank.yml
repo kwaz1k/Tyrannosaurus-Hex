@@ -11,18 +11,3 @@ jobs:
       run: npm i eslint-config-airbnb
     - name: Run ESLint
       run: npx eslint --no-eslintrc --config .eslintrc.yml .
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run predeploy
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages
-          folder: dist
-          token: ${{ secrets.GITHUB_TOKEN }}
