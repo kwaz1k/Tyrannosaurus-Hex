@@ -5,7 +5,7 @@
   "scripts": {
     "test": "npx eslint --no-eslintrc --config .eslintrc.yml .",
     "start": "parcel ./*.html",
-    "predeploy": "git add . && git commit -m 'predeploy' && git push && rm -rf dist && parcel build ./index.html",
+    "predeploy": "git add . && git commit && git push && rm -rf dist && parcel build ./index.html",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
