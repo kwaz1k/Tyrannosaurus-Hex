@@ -1,5 +1,5 @@
 # Tyrannosaurus-Hex
-## https://kwaz1k.github.io/Tyrannosaurus-Hex/
+## https://grittyzavr.github.io/Tyrannosaurus-Hex/
 
 ## Идея для игры:
 
