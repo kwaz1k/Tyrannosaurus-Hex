@@ -1,6 +1,4 @@
 name: linter and deploy
-with:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 on: push
 jobs:
   linter:
@@ -27,3 +25,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
