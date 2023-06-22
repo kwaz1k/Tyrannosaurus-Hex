@@ -11,7 +11,7 @@ const gameScene = new Phaser.Class({
       frameWidth: 243,
       frameHeight: 370,
     });
-    this.load.image('ground', 'https://upload.wikimedia.org/wikipedia/commons/2/22/Chromium_T-Rex-offline-trex.png');
+    this.load.image('ground', 'https://i.postimg.cc/05FFQpQq/2.png');
   },
 
   create() {
@@ -20,7 +20,7 @@ const gameScene = new Phaser.Class({
     const tHex = this.physics.add.sprite(100, 100, 'tHex'); // непосредственно чубрик наш.
     tHex.setGravityY(800); // гравитация по вертикали для братца нашего
     tHex.setScale(0.5); // масштабируем чубрика(он слишком здоровый в оригинале)
-    const ground = this.physics.add.staticImage(400, 720, 'ground'); // тут надо придумать как сделать обои и землю бесконечными
+    const ground = this.physics.add.staticImage(900, 800, 'ground'); // тут надо придумать как сделать обои и землю бесконечными
     ground.setScale(2).refreshBody();
     this.physics.add.collider(tHex, ground); // тут мы заставляем чубрика падать именно на землю.
   },
