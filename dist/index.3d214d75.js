@@ -633,7 +633,8 @@ function create() {
 },{"./game/gameScene.js":"1jSjr"}],"1jSjr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "gameScene", ()=>gameScene);
+parcelHelpers.export(exports, "gameScene", ()=>gameScene) // тут мы заставляем чубрика падать именно на землю.
+;
 const gameScene = new Phaser.Class({
     Extends: Phaser.Scene,
     initialize: function GameScene() {
@@ -657,7 +658,20 @@ const gameScene = new Phaser.Class({
         tHex.setScale(0.5); // масштабируем чубрика(он слишком здоровый в оригинале)
         const ground = this.physics.add.staticImage(900, 800, "ground"); // тут надо придумать как сделать обои и землю бесконечными
         ground.setScale(2).refreshBody();
-        this.physics.add.collider(tHex, ground); // тут мы заставляем чубрика падать именно на землю.
+        this.physics.add.collider(tHex, ground);
+        const cursors = this.input.keyboard.createCursorKeys();
+        const spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        cursors.up.on("down", ()=>{
+            if (tHex.body.touching.down) tHex.setVelocityY(-800);
+        });
+        spacebar.on("down", ()=>{
+            if (tHex.body.touching.down) {
+                tHex.setVelocityY(-800);
+                this.input.on("pointerdown", ()=>{
+                    if (tHex.body.touching.down) tHex.setVelocityY(-800);
+                });
+            }
+        });
     },
     update () {
     // Обновление игровой сцены
