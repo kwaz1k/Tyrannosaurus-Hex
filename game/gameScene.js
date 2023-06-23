@@ -16,7 +16,7 @@ const gameScene = new Phaser.Class({
 
   create() {
   // Add a background image
-    const backgroundImage = this.add.image( 640, 360, 'backgroundGame'); // тут надо придумать как сделать обои и землю бесконечными
+    const backgroundImage = this.add.image(640, 360, 'backgroundGame'); // тут надо придумать как сделать обои и землю бесконечными
     const tHex = this.physics.add.sprite(100, 100, 'tHex'); // непосредственно чубрик наш.
     tHex.setGravityY(800); // гравитация по вертикали для братца нашего
     tHex.setScale(0.5); // масштабируем чубрика(он слишком здоровый в оригинале)
