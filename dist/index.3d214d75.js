@@ -642,7 +642,7 @@ const gameScene = new Phaser.Class({
         });
     },
     preload () {
-        this.load.image("background", "https://i.postimg.cc/xnf9kMsf/background2.jpg?dl=1");
+        this.load.image("backgroundGame", "https://i.postimg.cc/ncCJCFZ6/wallpaperbetter-com-3840x2160-1.jpg");
         this.load.spritesheet("tHex", "https://i.postimg.cc/7Pn95fxc/1-bu.png", {
             frameWidth: 243,
             frameHeight: 370
@@ -651,7 +651,7 @@ const gameScene = new Phaser.Class({
     },
     create () {
         // Add a background image
-        const backgroundImage = this.add.image(700, 250, "background"); // тут надо придумать как сделать обои и землю бесконечными
+        const backgroundImage = this.add.image(640, 360, "backgroundGame"); // тут надо придумать как сделать обои и землю бесконечными
         const tHex = this.physics.add.sprite(100, 100, "tHex"); // непосредственно чубрик наш.
         tHex.setGravityY(800); // гравитация по вертикали для братца нашего
         tHex.setScale(0.5); // масштабируем чубрика(он слишком здоровый в оригинале)
