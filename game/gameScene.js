@@ -15,7 +15,6 @@ const gameScene = new Phaser.Class({
   },
 
   create() {
-  // Add a background image
     const backgroundImage = this.add.image(640, 360, 'backgroundGame'); // тут надо придумать как сделать обои и землю бесконечными
     const tHex = this.physics.add.sprite(100, 100, 'tHex'); // непосредственно чубрик наш.
     tHex.setGravityY(800); // гравитация по вертикали для братца нашего
@@ -23,26 +22,15 @@ const gameScene = new Phaser.Class({
     const ground = this.physics.add.staticImage(900, 800, 'ground'); // тут надо придумать как сделать обои и землю бесконечными
     ground.setScale(2).refreshBody();
     this.physics.add.collider(tHex, ground);
-    const cursors = this.input.keyboard.createCursorKeys();
-    const spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-    cursors.up.on('down', () => {
+    const cursors = this.input.keyboard.createCursorKeys(); // объект содержащий стрелки и пробел
+    const jump = () => {
       if (tHex.body.touching.down) {
         tHex.setVelocityY(-800);
       }
-    });
-
-    spacebar.on('down', () => {
-      if (tHex.body.touching.down) {
-        tHex.setVelocityY(-800);
-
-        this.input.on('pointerdown', () => {
-          if (tHex.body.touching.down) {
-            tHex.setVelocityY(-800);
-          }
-        });
-      }
-    });
+    };
+    cursors.up.on('down', jump); // прыжок на стрелку вверх
+    cursors.space.on('down', jump); // прыжок на пробел
+    this.input.on('pointerdown', jump); // прыжок на нажатие экрана
   },
 
   update() {
