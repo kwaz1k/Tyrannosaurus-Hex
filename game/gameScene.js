@@ -26,11 +26,24 @@ const gameScene = new Phaser.Class({
     const jump = () => {
       if (tHex.body.touching.down) {
         tHex.setVelocityY(-800);
+        this.isRunning = true;
       }
     };
     cursors.up.on('down', jump); // прыжок на стрелку вверх
     cursors.space.on('down', jump); // прыжок на пробел
     this.input.on('pointerdown', jump); // прыжок на нажатие экрана
+    this.speed = 5; // Adjust the running speed as needed
+    this.isRunning = false;
+    this.cameras.main.startFollow(tHex);
+    // Update function to move the character forward
+    this.update = function () {
+      if (this.isRunning) {
+        tHex.x += this.speed;
+        if (ground.x + ground.width <= 0) {
+          ground.x += ground.width * 2;
+        }
+      }
+    };
   },
 
   update() {
