@@ -1,6 +1,7 @@
 # Tyrannosaurus-Hex
-## https://grittyzavr.github.io/Tyrannosaurus-Hex/
-
-## Идея для игры:
-
-### Подобие динозаврика в хроме(очевидно, в стилистике хекслета), 4 уровня(так как 4 спринта), в конце каждого, для перехода на следующий нужно пройти мини-викторину по джаваскрипту, в последнем уровне можно сделать что-то другое, потому что финал.
+### this is our project where we recreated a classic browser game using PHASER.JS
+# this guide will help you install and run our game!
+### git clone https://github.com/grittyzavr/Tyrannosaurus-Hex.git
+### npm i 
+# after successful installation, we can start the game with the command 
+### parcel index.html
