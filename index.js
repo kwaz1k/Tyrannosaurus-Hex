@@ -17,16 +17,17 @@ const config = {
 const game = new Phaser.Game(config);
 // функция preload отвечает за ассеты которые игра должна подтянуть для себя)
 function preload() {
-  this.load.image('background', 'https://i.postimg.cc/xnf9kMsf/background2.jpg?dl=1');
-  this.load.image('defaultPlayButtonImage', 'https://i.postimg.cc/BbdPBjZ6/play-Button-Image.png'); // обычное изображение
-  this.load.image('defaultSelectButtonImage', 'https://i.postimg.cc/ncVgpLw4/select-Button-Image.png');
-  this.load.image('defaultAutorButtonImage', 'https://i.postimg.cc/PqfQ8LYy/autor-Button-Image.png');
+  this.load.image('background', 'https://i.postimg.cc/W1j6zxMm/wallpaperbetter-com-3840x2160-3.jpg');
+  this.load.image('logo', 'https://i.postimg.cc/8Cn1XJDy/image.png');
+  this.load.image('defaultPlayButtonImage', 'https://i.postimg.cc/154HV439/11.png'); // обычное изображение
+  this.load.image('defaultAutorButtonImage', 'https://i.postimg.cc/fRKLWdbT/author-Button.png');
 }
 // функция create - создает сцену
 function create() {
-  this.add.image(700, 250, 'background');
+  this.add.image(640, 360, 'background');
+  this.add.image(640, 230, 'logo');
 
-  const defaultPlayButtonImage = this.add.image(466, 360, 'defaultPlayButtonImage')
+  const defaultPlayButtonImage = this.add.image(640, 370, 'defaultPlayButtonImage')
     .setInteractive()
     .on('pointerdown', startGame.bind(this)); // Вот здесь мы привязываем контекст
   defaultPlayButtonImage.on('pointerover', () => {
@@ -37,18 +38,7 @@ function create() {
     defaultPlayButtonImage.setScale(1); // Возврат к обычному размеру при уходе указателя
   });
   // тут пока ничего не делаем
-  const leveChoiceButton = this.add.image(696, 360, 'defaultSelectButtonImage')
-    .setInteractive()
-    .on('pointerdown', () => levelChoice());
-  leveChoiceButton.on('pointerover', () => {
-    leveChoiceButton.setScale(1.05); // Увеличение размера при наведении
-  });
-
-  leveChoiceButton.on('pointerout', () => {
-    leveChoiceButton.setScale(1); // Возврат к обычному размеру при уходе указателя
-  });
-  // тут пока ничего не делаем
-  const creditsButton = this.add.image(926, 360, 'defaultAutorButtonImage')
+  const creditsButton = this.add.image(640, 470, 'defaultAutorButtonImage')
     .setInteractive()
     .on('pointerdown', () => credits());
   creditsButton.on('pointerover', () => {
@@ -63,11 +53,6 @@ function create() {
     console.log('Игра начинается...');
     // Здесь вы можете переключиться на другую сцену, которая запускает игру
     this.scene.start('gameScene');
-  }
-
-  function levelChoice() {
-    console.log('Открытие выбора уровня...');
-    // тут пропишем переключение на сцену для уровней(если все-таки будем их делать)
   }
 
   function credits() {
