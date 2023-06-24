@@ -36,7 +36,7 @@ const gameScene = new Phaser.Class({
     this.isRunning = false;
     this.cameras.main.startFollow(tHex);
     // Update function to move the character forward
-    this.update = function () {
+    this.update = () => {
       if (this.isRunning) {
         tHex.x += this.speed;
         if (ground.x + ground.width <= 0) {
