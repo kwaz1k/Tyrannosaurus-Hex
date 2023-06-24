@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/grittyzavr/Tyrannosaurus-Hex#readme",
   "dependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb": "^19.0.4",
     "gh-pages": "^5.0.0",
     "parcel": "^2.9.2",
     "phaser": "^3.60.0"
