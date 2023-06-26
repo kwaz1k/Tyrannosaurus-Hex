@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"9N4eD":[function(require,module,exports) {
+})({"2UeK4":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -577,8 +577,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var _gameSceneJs = require("./game/gameScene.js");
 const config = {
     type: Phaser.AUTO,
-    width: 1280,
-    height: 720,
+    scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: window.innerWidth,
+        height: window.innerHeight
+    },
     scene: [
         {
             preload,
@@ -606,17 +610,36 @@ function preload() {
 }
 // функция create - создает сцену
 function create() {
-    this.add.image(640, 360, "background");
-    this.add.image(640, 230, "logo");
-    const defaultPlayButtonImage = this.add.image(640, 370, "defaultPlayButtonImage").setInteractive().on("pointerdown", startGame.bind(this)); // Вот здесь мы привязываем контекст
+    const { width  } = this.sys.game.config;
+    const { height  } = this.sys.game.config;
+    const background = this.add.image(0, 0, "background").setOrigin(0, 0);
+    const logo = this.add.image(width / 2, height / 2 - 130, "logo");
+    const resizeBackground = ()=>{
+        if (this.cameras.main) {
+            const scaleX = this.cameras.main.width / background.width;
+            const scaleY = this.cameras.main.height / background.height;
+            const scale = Math.max(scaleX, scaleY);
+            background.setScale(scale).setScrollFactor(0);
+        }
+    };
+    const resizeLogo = ()=>{
+        const scale = width / 1050; // Предполагаем, что исходная ширина логотипа 1920
+        logo.setScale(scale);
+    };
+    resizeBackground();
+    resizeLogo();
+    this.scale.on("resize", ()=>{
+        resizeBackground();
+        resizeLogo();
+    });
+    const defaultPlayButtonImage = this.add.image(width / 2, height / 2, "defaultPlayButtonImage").setInteractive().on("pointerdown", startGame.bind(this)); // Вот здесь мы привязываем контекст
     defaultPlayButtonImage.on("pointerover", ()=>{
         defaultPlayButtonImage.setScale(1.05); // Увеличение размера при наведении
     });
     defaultPlayButtonImage.on("pointerout", ()=>{
         defaultPlayButtonImage.setScale(1); // Возврат к обычному размеру при уходе указателя
     });
-    // тут пока ничего не делаем
-    const creditsButton = this.add.image(640, 470, "defaultAutorButtonImage").setInteractive().on("pointerdown", ()=>credits());
+    const creditsButton = this.add.image(width / 2, height / 2 + 110, "defaultAutorButtonImage").setInteractive().on("pointerdown", ()=>credits());
     creditsButton.on("pointerover", ()=>{
         creditsButton.setScale(1.05); // Увеличение размера при наведении
     });
@@ -647,27 +670,47 @@ const gameScene = new Phaser.Class({
     },
     preload () {
         this.load.image("backgroundGame", "https://i.postimg.cc/ncCJCFZ6/wallpaperbetter-com-3840x2160-1.jpg");
-        this.load.spritesheet("tHex", "https://i.postimg.cc/7Pn95fxc/1-bu.png", {
+        this.load.spritesheet("tHex", "https://i.postimg.cc/SsRRc797/spritesheet.png", {
             frameWidth: 243,
             frameHeight: 370
         });
-        this.load.image("ground", "https://i.postimg.cc/05FFQpQq/2.png");
+        this.load.image("ground", "https://i.postimg.cc/8c9BWznw/ground.png");
     },
     create () {
-        const backgroundImage = this.add.image(640, 360, "backgroundGame"); // фоновое изображение
-        const tHex = this.physics.add.sprite(100, 100, "tHex"); // персонаж
+        this.anims.create({
+            key: "jump",
+            frames: this.anims.generateFrameNumbers("tHex", {
+                start: 1,
+                end: 1
+            }),
+            frameRate: 10
+        });
+        this.anims.create({
+            key: "idle",
+            frames: this.anims.generateFrameNumbers("tHex", {
+                start: 0,
+                end: 0
+            }),
+            frameRate: 10
+        });
+        const { width , height  } = this.sys.game.config;
+        this.backgroundImage = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, "backgroundGame").setOrigin(0, 0).setScrollFactor(0).setScale(1, 1600 / width);
+        const tHex = this.physics.add.sprite(1080, this.sys.game.config.height - 200, "tHex"); // персонаж
+        this.grounds = this.physics.add.staticGroup();
+        for(let i = 0; i < 3; i += 1){
+            const ground = this.grounds.create(1080 + i * 1080, this.sys.game.config.height, "ground");
+            this.physics.add.collider(tHex, ground);
+        }
         tHex.setGravityY(800); // гравитация по вертикали
         tHex.setScale(0.5); // масштабирование персонажа
-        const ground = this.physics.add.staticImage(900, 800, "ground"); // земля
-        ground.setScale(2).refreshBody();
-        this.physics.add.collider(tHex, ground);
         const cursors = this.input.keyboard.createCursorKeys(); // объект, содержащий клавиши управления
         const jump = ()=>{
             if (tHex.body.touching.down) {
-                tHex.setVelocityY(-800);
+                tHex.setVelocityY(-500);
                 this.isRunning = true;
                 this.score += 10; // начисление 10 баллов за прыжок
-                this.scoreText.setText("Score: " + this.score); // обновление текста счета
+                this.scoreText.setText(`Score: ${this.score}`); // обновление текста счета
+                tHex.anims.play("jump"); // текстура прыжка
             }
         };
         cursors.up.on("down", jump); // прыжок по стрелке вверх
@@ -675,26 +718,33 @@ const gameScene = new Phaser.Class({
         this.input.on("pointerdown", jump); // прыжок по нажатию экрана
         this.speed = 5; // скорость перемещения персонажа
         this.isRunning = false;
-        this.cameras.main.startFollow(tHex);
+        this.cameras.main.startFollow(tHex, true, 0.5, 0.5, 0, 150);
         this.score = 0; // переменная для хранения текущего счета
         this.scoreText = this.add.text(16, 16, "Score: 0", {
             fontSize: "32px",
-            fill: "#fff"
+            fill: "#fff",
+            fontFamily: "MinecraftiaRegular"
         }); // текст счета
+        this.scoreText.setScrollFactor(0);
         // функция обновления, перемещающая персонажа вперед
         this.update = ()=>{
             if (this.isRunning) {
                 tHex.x += this.speed;
-                if (ground.x + ground.width <= 0) ground.x += ground.width * 2;
+                this.backgroundImage.tilePositionX = this.cameras.main.scrollX * 0.3; // медленное движение
+            }
+            if (tHex.body.touching.down && tHex.anims.currentAnim && tHex.anims.currentAnim.key === "jump") tHex.anims.play("idle"); // Воспроизведение обычной анимации персонажа
+            if (tHex.x > this.grounds.getChildren()[0].x + 1080) {
+                // Удалить старую землю
+                this.grounds.getChildren()[0].destroy();
+                // Добавить новую землю
+                const newGround = this.grounds.create(this.grounds.getChildren()[this.grounds.getChildren().length - 1].x + 1080, this.sys.game.config.height, "ground");
+                this.physics.add.collider(tHex, newGround);
             }
         };
-    },
-    update () {
-    // обновление игровой сцены
     }
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"fD7H8":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -724,6 +774,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["9N4eD","bB7Pu"], "bB7Pu", "parcelRequire44c6")
+},{}]},["2UeK4","bB7Pu"], "bB7Pu", "parcelRequire44c6")
 
 //# sourceMappingURL=index.3d214d75.js.map
