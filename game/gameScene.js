@@ -26,7 +26,7 @@ const gameScene = new Phaser.Class({
       frameRate: 10,
     });
     const { width, height } = this.sys.game.config;
-    this.backgroundImage = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'backgroundGame').setOrigin(0, 0).setScrollFactor(0).setScale(1, 1600 / width);
+    this.backgroundImage = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'backgroundGame').setOrigin(0, 0).setScrollFactor(0).setScale(1920 / width, 1200 / height);
     const tHex = this.physics.add.sprite(1080, this.sys.game.config.height - 200, 'tHex'); // персонаж
     this.grounds = this.physics.add.staticGroup();
     for (let i = 0; i < 3; i += 1) {
