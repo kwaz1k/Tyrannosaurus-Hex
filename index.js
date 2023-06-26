@@ -43,7 +43,7 @@ function create() {
     }
   };
   const resizeLogo = () => {
-    const scale = width / 1050; // Предполагаем, что исходная ширина логотипа 1920
+    const scale = width / 1300; // Предполагаем, что исходная ширина логотипа 1920
     logo.setScale(scale);
   };
 
@@ -54,7 +54,7 @@ function create() {
     resizeBackground();
     resizeLogo();
   });
-  const defaultPlayButtonImage = this.add.image(width / 2, height / 2, 'defaultPlayButtonImage')
+  const defaultPlayButtonImage = this.add.image(width / 2, (height / 2) + 50, 'defaultPlayButtonImage')
     .setInteractive()
     .on('pointerdown', startGame.bind(this)); // Вот здесь мы привязываем контекст
 
@@ -66,7 +66,7 @@ function create() {
     defaultPlayButtonImage.setScale(1); // Возврат к обычному размеру при уходе указателя
   });
 
-  const creditsButton = this.add.image(width / 2, height / 2 + 110, 'defaultAutorButtonImage')
+  const creditsButton = this.add.image(width / 2, height / 2 + 160, 'defaultAutorButtonImage')
     .setInteractive()
     .on('pointerdown', () => credits());
 

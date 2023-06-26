@@ -1,6 +1,11 @@
-@font-face {
-    font-family: 'MinecraftiaRegular';
-    src: url('https://fontlibrary.org//face/minecraftia');
-    font-weight: normal;
-    font-style: normal;
+canvas {
+    display: none;
+}
+@media (min-width: 1280px) and (min-height: 720px) {
+   canvas {
+    display: block;
+   }
+   h1 {
+    display: none;
+   }
 }
