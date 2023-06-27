@@ -1,1 +1,0 @@
-{"mappings":"AAAA;;;;AAGA;EACG;;;;EAGA","sources":["index.css"],"sourcesContent":["canvas {\n    display: none;\n}\n@media (min-width: 1280px) and (min-height: 720px) {\n   canvas {\n    display: block;\n   }\n   h1 {\n    display: none;\n   }\n}\n"],"names":[],"version":3,"file":"index.9e4c6fd2.css.map","sourceRoot":"/__parcel_source_root/"}
