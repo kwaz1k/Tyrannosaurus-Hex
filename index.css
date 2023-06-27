@@ -4,6 +4,7 @@ canvas {
     display: none;
 }
 
+
 body {
     background-image: url("https://i.postimg.cc/W1j6zxMm/wallpaperbetter-com-3840x2160-3.jpg");
     background-repeat: no-repeat;
@@ -17,9 +18,13 @@ body {
     color: white;
 }
 
-h1 {
+a {
+  color: #119922;
+}
+
+p {
     text-shadow: 3px 3px 6px black;
-    font-size: 24px;
+    font-size: 15px;
     font-weight: bold;
     margin: 10px;
     text-align: center;

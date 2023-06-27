@@ -26,6 +26,18 @@ function preload() {
   this.load.image('logo', 'https://i.postimg.cc/8Cn1XJDy/image.png');
   this.load.image('defaultPlayButtonImage', 'https://i.postimg.cc/154HV439/11.png'); // обычное изображение
   this.load.image('defaultAutorButtonImage', 'https://i.postimg.cc/fRKLWdbT/author-Button.png');
+  this.load.image('playAgainButton', 'https://i.postimg.cc/pXnr4zVQ/4.png');
+  this.load.image('gameOverPicture', 'https://i.postimg.cc/13rq7wMC/image.png');
+  this.load.image('backgroundGame', 'https://i.postimg.cc/ncCJCFZ6/wallpaperbetter-com-3840x2160-1.jpg');
+  this.load.spritesheet('tHex', 'https://i.postimg.cc/NM746MZ3/big-sprites-copy.png', {
+    frameWidth: 243,
+    frameHeight: 370,
+  });
+  this.load.image('ground', 'https://i.postimg.cc/8c9BWznw/ground.png');
+  this.load.image('obstacle1', 'https://i.postimg.cc/ZRfh2H7N/car.png');
+  this.load.image('obstacle2', 'https://i.postimg.cc/zXH12nnL/container.png');
+  this.load.image('obstacle3', 'https://i.postimg.cc/Zn9XgSyk/mahina.png');
+  this.load.image('obstacle4', 'https://i.postimg.cc/X7krqSzc/trash-ready.png');
 }
 // функция create - создает сцену
 function create() {
