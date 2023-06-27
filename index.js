@@ -1,4 +1,5 @@
 import { gameScene } from './game/gameScene.js';
+import { gameOver } from './game/gameOver.js';
 
 const config = {
   type: Phaser.AUTO,
@@ -8,7 +9,7 @@ const config = {
     width: window.innerWidth,
     height: window.innerHeight,
   },
-  scene: [{ preload, create }, gameScene], // Передаем в конструктор массив сцен
+  scene: [{ preload, create }, gameOver, gameScene], // Передаем в конструктор массив сцен
   physics: {
     default: 'arcade',
     arcade: {

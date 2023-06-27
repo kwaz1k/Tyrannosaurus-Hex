@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"9N4eD":[function(require,module,exports) {
+})({"2UeK4":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -575,6 +575,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"bB7Pu":[function(require,module,exports) {
 var _gameSceneJs = require("./game/gameScene.js");
+var _gameOverJs = require("./game/gameOver.js");
 const config = {
     type: Phaser.AUTO,
     scale: {
@@ -588,6 +589,7 @@ const config = {
             preload,
             create
         },
+        (0, _gameOverJs.gameOver),
         (0, _gameSceneJs.gameScene)
     ],
     physics: {
@@ -657,7 +659,7 @@ function create() {
     }
 }
 
-},{"./game/gameScene.js":"1jSjr"}],"1jSjr":[function(require,module,exports) {
+},{"./game/gameScene.js":"1jSjr","./game/gameOver.js":"imXk9"}],"1jSjr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gameScene", ()=>gameScene);
@@ -671,7 +673,7 @@ const gameScene = new Phaser.Class({
     preload () {
         // Загрузка ассетов игры
         this.load.image("backgroundGame", "https://i.postimg.cc/ncCJCFZ6/wallpaperbetter-com-3840x2160-1.jpg");
-        this.load.spritesheet("tHex", "https://i.postimg.cc/SsRRc797/spritesheet.png", {
+        this.load.spritesheet("tHex", "https://i.postimg.cc/NM746MZ3/big-sprites-copy.png", {
             frameWidth: 243,
             frameHeight: 370
         });
@@ -685,38 +687,48 @@ const gameScene = new Phaser.Class({
         this.anims.create({
             key: "jump",
             frames: this.anims.generateFrameNumbers("tHex", {
-                start: 1,
-                end: 1
+                start: 3,
+                end: 3
             }),
             frameRate: 10
         });
         this.anims.create({
-            key: "idle",
+            key: "run",
             frames: this.anims.generateFrameNumbers("tHex", {
                 start: 0,
-                end: 0
+                end: 1
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "idle",
+            frames: this.anims.generateFrameNumbers("tHex", {
+                start: 2,
+                end: 2
             }),
             frameRate: 10
         });
         const { width , height  } = this.sys.game.config;
         // Задний фон игры
-        this.backgroundImage = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, "backgroundGame").setOrigin(0, 0).setScrollFactor(0).setScale(1920 / width, 1200 / height);
-        const tHex = this.physics.add.sprite(1080, this.sys.game.config.height - 200, "tHex"); // персонаж
+        this.backgroundImage = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, "backgroundGame").setOrigin(0, 0).setScrollFactor(0).setScale(3160 / width, 2140 / height);
+        this.tHex = this.physics.add.sprite(1080, this.sys.game.config.height - 200, "tHex"); // персонаж
         this.grounds = this.physics.add.staticGroup();
         for(let i = 0; i < 3; i += 1){
             const ground = this.grounds.create(1080 + i * 1080, this.sys.game.config.height, "ground");
-            this.physics.add.collider(tHex, ground);
+            this.physics.add.collider(this.tHex, ground);
         }
-        tHex.setGravityY(800); // гравитация по вертикали
-        tHex.setScale(0.5); // масштабирование персонажа
+        this.tHex.setGravityY(800); // гравитация по вертикали
+        this.tHex.setScale(0.5); // масштабирование персонажа
         const cursors = this.input.keyboard.createCursorKeys(); // объект, содержащий клавиши управления
         const jump = ()=>{
-            if (tHex.body.touching.down) {
-                tHex.setVelocityY(-500);
+            if (this.tHex.body.touching.down) {
+                this.tHex.setVelocityY(-500);
+                this.tHex.setVelocityX(300);
                 this.isRunning = true;
                 this.score += 10; // начисление 10 баллов за прыжок
                 this.scoreText.setText(`Score: ${this.score}`); // обновление текста счета
-                tHex.anims.play("jump"); // текстура прыжка
+                this.tHex.anims.play("jump"); // текстура прыжка
             }
         };
         cursors.up.on("down", jump); // прыжок по стрелке вверх
@@ -724,7 +736,7 @@ const gameScene = new Phaser.Class({
         this.input.on("pointerdown", jump); // прыжок по нажатию экрана
         this.speed = 5; // скорость перемещения персонажа
         this.isRunning = false;
-        this.cameras.main.startFollow(tHex, true, 0.5, 0.5, 0, 150);
+        this.cameras.main.startFollow(this.tHex, true, 0.5, 0.5, 0, 150);
         this.score = 0; // переменная для хранения текущего счета
         this.scoreText = this.add.text(16, 16, "Score: 0", {
             fontSize: "32px",
@@ -735,46 +747,46 @@ const gameScene = new Phaser.Class({
         this.obstacles = this.physics.add.group({
             immovable: true
         }); // Препятствие и их логика
-        for(let i = 0; i < 4; i++){
-            const obstacleNumber = Phaser.Math.Between(1, 4);
-            const obstacleX = Phaser.Math.Between(2000, 4000);
-            const obstacle = this.obstacles.create(obstacleX, this.sys.game.config.height - 300, `obstacle${obstacleNumber}`).setScale(0.5);
-            obstacle.setCollideWorldBounds(true);
-            obstacle.setVelocityX(-this.speed);
-            this.physics.add.collider(tHex, obstacle, ()=>{
-                this.scene.restart();
-            }, null, this);
-        }
+        this.time.addEvent({
+            delay: 3000,
+            callback: this.spawnObstacle,
+            callbackScope: this,
+            loop: true
+        });
         // функция обновления, перемещающая персонажа вперед
         this.update = ()=>{
             if (this.isRunning) {
-                tHex.x += this.speed;
+                this.tHex.x += this.speed;
                 this.backgroundImage.tilePositionX = this.cameras.main.scrollX * 0.3; // медленное движение
             }
-            if (tHex.body.touching.down && tHex.anims.currentAnim && tHex.anims.currentAnim.key === "jump") tHex.anims.play("idle"); // Воспроизведение обычной анимации персонажа
-            if (tHex.x > this.grounds.getChildren()[0].x + 1080) {
+            if (this.tHex.body.touching.down && this.tHex.anims.currentAnim && this.tHex.anims.currentAnim.key === "jump") this.tHex.anims.play("run"); // Воспроизведение обычной анимации персонажа
+            if (this.tHex.x > this.grounds.getChildren()[0].x + 1080) {
                 // Удалить старую землю
                 this.grounds.getChildren()[0].destroy();
                 // Добавить новую землю
                 const newGround = this.grounds.create(this.grounds.getChildren()[this.grounds.getChildren().length - 1].x + 1080, this.sys.game.config.height, "ground");
-                this.physics.add.collider(tHex, newGround);
-                //  новые препятствия
-                for(let i = 0; i < 4; i++){
-                    const obstacleNumber = Phaser.Math.Between(1, 4);
-                    const obstacleX = Phaser.Math.Between(this.grounds.getChildren()[this.grounds.getChildren().length - 1].x + 2000, this.grounds.getChildren()[this.grounds.getChildren().length - 1].x + 4000);
-                    const obstacle = this.obstacles.create(obstacleX, this.sys.game.config.height - 300, `obstacle${obstacleNumber}`).setScale(0.5);
-                    obstacle.setCollideWorldBounds(true);
-                    obstacle.setVelocityX(-this.speed);
-                    this.physics.add.collider(tHex, obstacle, ()=>{
-                        this.scene.restart();
-                    }, null, this);
-                }
+                this.physics.add.collider(this.tHex, newGround);
             }
         };
+    },
+    spawnObstacle () {
+        const obstacleNumber = Phaser.Math.Between(1, 4);
+        const randomX = Phaser.Math.Between(this.tHex.x + Phaser.Math.Between(1000, 1500), this.tHex.x + 3000);
+        this.physics.world.setBounds(0, 0, randomX + 2000, this.sys.game.config.height);
+        const obstacle = this.obstacles.create(randomX, this.sys.game.config.height - 100, `obstacle${obstacleNumber}`).setScale(0.2);
+        obstacle.setDepth(1);
+        obstacle.setCollideWorldBounds(true);
+        obstacle.setVelocityX(-this.speed);
+        this.physics.add.collider(this.tHex, obstacle, ()=>{
+            this.scene.start("gameOver");
+        }, null, this);
+        this.grounds.children.iterate((child)=>{
+            this.physics.add.collider(obstacle, child);
+        });
     }
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8"}],"fD7H8":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -804,6 +816,45 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["9N4eD","bB7Pu"], "bB7Pu", "parcelRequire44c6")
+},{}],"imXk9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "gameOver", ()=>gameOver);
+const gameOver = new Phaser.Class({
+    Extends: Phaser.Scene,
+    initialize: function GameScene() {
+        Phaser.Scene.call(this, {
+            key: "gameOver"
+        });
+    },
+    preload () {
+        this.load.image("playAgainButton", "https://i.postimg.cc/pXnr4zVQ/4.png");
+        this.load.image("gameOverPicture", "https://i.postimg.cc/13rq7wMC/image.png");
+    },
+    create () {
+        const { width  } = this.sys.game.config;
+        const { height  } = this.sys.game.config;
+        const background = this.add.image(0, 0, "gameOverPicture").setOrigin(0, 0);
+        const resizeBackground = ()=>{
+            const scaleX = this.cameras.main.width / background.width;
+            const scaleY = this.cameras.main.height / background.height;
+            background.setScale(scaleX, scaleY).setScrollFactor(0);
+        };
+        resizeBackground();
+        const playAgainButton = this.add.image(width / 2, height / 2 + 100, "playAgainButton").setInteractive().on("pointerdown", playAgain.bind(this)) // Вот здесь мы привязываем контекст
+        .setScale(0.4);
+        playAgainButton.on("pointerover", ()=>{
+            playAgainButton.setScale(0.45); // Увеличение размера при наведении
+        });
+        playAgainButton.on("pointerout", ()=>{
+            playAgainButton.setScale(0.4); // Возврат к обычному размеру при уходе указателя
+        });
+        function playAgain() {
+            this.scene.start("gameScene");
+        }
+    }
+});
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2UeK4","bB7Pu"], "bB7Pu", "parcelRequire44c6")
 
 //# sourceMappingURL=index.3d214d75.js.map
