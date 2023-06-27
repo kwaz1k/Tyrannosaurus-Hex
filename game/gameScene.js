@@ -111,7 +111,8 @@ const gameScene = new Phaser.Class({
   },
   spawnObstacle() {
     const obstacleNumber = Phaser.Math.Between(1, 4);
-    const randomX = Phaser.Math.Between(this.tHex.x + Phaser.Math.Between(1000, 1500), this.tHex.x + 3000);
+    const preRandomX = this.tHex.x + Phaser.Math.Between(1000, 1500);
+    const randomX = Phaser.Math.Between(preRandomX, this.tHex.x + 3000);
     this.physics.world.setBounds(0, 0, randomX + 2000, this.sys.game.config.height);
     const obstacle = this.obstacles.create(randomX, this.sys.game.config.height - 100, `obstacle${obstacleNumber}`).setScale(0.2);
     obstacle.setDepth(1);

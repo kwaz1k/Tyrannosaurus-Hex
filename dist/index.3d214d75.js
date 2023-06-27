@@ -771,7 +771,8 @@ const gameScene = new Phaser.Class({
     },
     spawnObstacle () {
         const obstacleNumber = Phaser.Math.Between(1, 4);
-        const randomX = Phaser.Math.Between(this.tHex.x + Phaser.Math.Between(1000, 1500), this.tHex.x + 3000);
+        const preRandomX = this.tHex.x + Phaser.Math.Between(1000, 1500);
+        const randomX = Phaser.Math.Between(preRandomX, this.tHex.x + 3000);
         this.physics.world.setBounds(0, 0, randomX + 2000, this.sys.game.config.height);
         const obstacle = this.obstacles.create(randomX, this.sys.game.config.height - 100, `obstacle${obstacleNumber}`).setScale(0.2);
         obstacle.setDepth(1);
@@ -830,8 +831,11 @@ const gameOver = new Phaser.Class({
     preload () {
         this.load.image("playAgainButton", "https://i.postimg.cc/pXnr4zVQ/4.png");
         this.load.image("gameOverPicture", "https://i.postimg.cc/13rq7wMC/image.png");
+        this.load.audio("gameOverSound", "https://archive.org/download/NIntendo-sounds/Mario%201%20-%20Game%20Over.ogg");
     },
     create () {
+        const sound = this.sound.add("gameOverSound");
+        sound.play();
         const { width  } = this.sys.game.config;
         const { height  } = this.sys.game.config;
         const background = this.add.image(0, 0, "gameOverPicture").setOrigin(0, 0);
