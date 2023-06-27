@@ -1,6 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Minecraftia&display=swap');
+
 canvas {
     display: none;
 }
+
+body {
+    background-image: url("https://i.postimg.cc/W1j6zxMm/wallpaperbetter-com-3840x2160-3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Minecraftia', sans-serif;
+    color: white;
+}
+
+h1 {
+    text-shadow: 3px 3px 6px black;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+  }
+  
+
 @media (min-width: 1280px) and (min-height: 720px) {
    canvas {
     display: block;
@@ -9,3 +34,9 @@ canvas {
     display: none;
    }
 }
+
+@media only screen and (max-width: 600px) {
+    h1 {
+      font-size: 18px;
+    }
+  }
