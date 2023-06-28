@@ -35,6 +35,7 @@ class GameOverScene extends Phaser.Scene {
   }
 
   playAgain() {
+    this.scene.get('gameScene').resetScore();
     this.scene.start('gameScene');
   }
 }

@@ -43,6 +43,11 @@ class GameScene extends Phaser.Scene {
       .setScale(3160 / width, 2140 / height);
   }
 
+  resetScore() {
+    this.score = 0;
+    this.scoreText.setText(`Score: ${this.score}`);
+  }
+
   createCharacter() {
     const { height } = this.sys.game.config;
     this.tHex = this.physics.add.sprite(1080, height - 200, 'tHex');
