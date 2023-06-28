@@ -19,7 +19,8 @@ This is our project where we are recreated a classic browser game using Phaser.J
 
 1) Open terminal app. (make sure, that you have installed git and node)
 2) Run followed commands.
-`git clone https://github.com/grittyzavr/Tyrannosaurus-Hex.git`
+`git clone https://github.com/grittyzavr/Tyrannosaurus-Hex.git`\
+`cd Tyrannosaurus-Hex`\
 `npm i `
 3) After successful installation, we can start the game on local machine with the command
 `parcel index.html`
