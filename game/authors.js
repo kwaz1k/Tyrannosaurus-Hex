@@ -18,7 +18,7 @@ class AuthorsScene extends Phaser.Scene {
     const text = this.add.text(
       this.cameras.main.centerX,
       this.cameras.main.height,
-      'Authors:\nKirillov Timofey\nKuchmenko Dmitriy\nEnyaev Boris\nVladimirova Alena\nShebanov Oleg',
+      'Authors:\nKirillov Timofey\nKuchmenko Dmitriy\nEnyaev Boris\nVladimirova Alena\nShebanov Oleg\nShtanko Petr',
       {
         fontSize: '70px',
         fontFamily: 'MinecraftiaRegular',
