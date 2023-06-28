@@ -1,5 +1,6 @@
 import { gameScene } from './game/gameScene.js';
 import { gameOver } from './game/gameOver.js';
+import { authors } from './game/authors.js';
 
 const config = {
   type: Phaser.AUTO,
@@ -9,7 +10,7 @@ const config = {
     width: window.innerWidth,
     height: window.innerHeight,
   },
-  scene: [{ preload, create }, gameOver, gameScene], // Передаем в конструктор массив сцен
+  scene: [{ preload, create }, gameOver, gameScene, authors], // Передаем в конструктор массив сцен
   physics: {
     default: 'arcade',
     arcade: {
@@ -81,7 +82,7 @@ function create() {
 
   const creditsButton = this.add.image(width / 2, height / 2 + 160, 'defaultAutorButtonImage')
     .setInteractive()
-    .on('pointerdown', () => credits());
+    .on('pointerdown', credits.bind(this));
 
   creditsButton.on('pointerover', () => {
     creditsButton.setScale(1.05); // Увеличение размера при наведении
@@ -100,5 +101,6 @@ function create() {
   function credits() {
     console.log('Открытие титров...');
     // тут пропишем переключение на сцену для титров
+    this.scene.start('authors');
   }
 }
