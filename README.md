@@ -1,8 +1,9 @@
 ![Simple webgame](https://i.postimg.cc/QXjHt1zr/image.png)
+## Trailer
+[![trailer](https://img.youtube.com/vi/pNvjWoAH2E4/0.jpg)](https://www.youtube.com/watch?v=pNvjWoAH2E4)
+
 ## Demo of the game
 https://grittyzavr.github.io/Tyrannosaurus-Hex/
-
-[![trailer](https://img.youtube.com/vi/pNvjWoAH2E4/0.jpg)](https://www.youtube.com/watch?v=pNvjWoAH2E4)
 
 ## Description
 This is our project where we are recreated a classic browser game using Phaser.JS and our vision
