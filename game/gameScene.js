@@ -14,6 +14,7 @@ class GameScene extends Phaser.Scene {
     this.createCamera();
     this.createScoreText();
     this.createObstacles();
+    this.resetScore();
   }
 
   update() {
@@ -129,7 +130,7 @@ class GameScene extends Phaser.Scene {
     const randomX = Phaser.Math.Between(preRandomX, this.tHex.x + 3000);
     this.physics.world.setBounds(0, 0, randomX + 2000, this.sys.game.config.height);
 
-    const obstacle = this.obstacles.create(randomX, this.sys.game.config.height - 100, `obstacle${obstacleNumber}`).setScale(0.2);
+    const obstacle = this.obstacles.create(randomX, this.sys.game.config.height - 100, `obstacle${obstacleNumber}`).setScale(0.3);
     obstacle.setDepth(1);
     obstacle.setCollideWorldBounds(true);
     obstacle.setVelocityX(-this.speed);

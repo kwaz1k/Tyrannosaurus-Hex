@@ -3,11 +3,6 @@ class GameOverScene extends Phaser.Scene {
     super({ key: 'gameOver' });
   }
 
-  preload() {
-    this.load.image('playAgainButton', 'https://i.postimg.cc/pXnr4zVQ/4.png');
-    this.load.image('gameOverPicture', 'https://i.postimg.cc/13rq7wMC/image.png');
-  }
-
   create() {
     const { width, height } = this.sys.game.config;
     const background = this.add.image(0, 0, 'gameOverPicture').setOrigin(0, 0);
@@ -32,10 +27,26 @@ class GameOverScene extends Phaser.Scene {
     playAgainButton.on('pointerout', () => {
       playAgainButton.setScale(0.4);
     });
+
+    const mainMenuButton = this.add.image(width / 2, (height / 2) + 230, 'mainMenuButton')
+      .setInteractive()
+      .on('pointerdown', this.mainMenu.bind(this))
+      .setScale(0.4);
+
+    mainMenuButton.on('pointerover', () => {
+      mainMenuButton.setScale(0.45);
+    });
+
+    mainMenuButton.on('pointerout', () => {
+      mainMenuButton.setScale(0.4);
+    });
+  }
+
+  mainMenu() {
+    this.scene.start('mainMenu');
   }
 
   playAgain() {
-    this.scene.get('gameScene').resetScore();
     this.scene.start('gameScene');
   }
 }
