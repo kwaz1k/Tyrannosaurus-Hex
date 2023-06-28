@@ -1,12 +1,7 @@
-const authors = new Phaser.Class({
-  Extends: Phaser.Scene,
-
-  initialize: function GameScene() {
-    Phaser.Scene.call(this, { key: 'authors' });
-  },
-
-  preload() {
-  },
+class AuthorsScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'authors' });
+  }
 
   create() {
     const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -19,12 +14,13 @@ const authors = new Phaser.Class({
       }
     };
     resizeBackground();
+
     const text = this.add.text(
       this.cameras.main.centerX,
       this.cameras.main.height,
       'Authors:\nKirillov Timofey\nKuchmenko Dmitriy\nEnyaev Boris\nVladimirova Alena\nShebanov Oleg',
       {
-        fontSize: '40px',
+        fontSize: '70px',
         fontFamily: 'MinecraftiaRegular',
         align: 'center',
         color: '#ffff00',
@@ -38,10 +34,13 @@ const authors = new Phaser.Class({
       y: -text.displayHeight,
       scaleX: 0.01,
       scaleY: 0.01,
-      duration: 5000, // adjust as needed
+      duration: 6000, // adjust as needed
       ease: 'Linear',
+      onComplete: () => {
+        this.scene.start('mainMenu');
+      },
     });
-  },
-});
+  }
+}
 
-export { authors };
+export { AuthorsScene };
